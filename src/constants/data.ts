@@ -62,8 +62,8 @@ export const PROJECTS = [
     period: "Jul - Aug 2025",
     description:
       "Developed to present local area data, public information, and community activities in a clear and accessible digital format.",
-    role: "front-end developer, backend",
-    role2: "product manager",
+    role: "front-end developer",
+    role2: "",
     githubLink: "https://github.com/raffi194/Web-Sukolilo",
     webLink: "https://web-sukolilo-deploy.vercel.app/",
   },
@@ -84,8 +84,8 @@ export const PROJECTS = [
     period: "Sep - Dec 2025",
     description:
       "Designed to streamline interactions between users and medical professionals through a simple, user-friendly consultation flow.",
-    role: "front-end developer, logging logic",
-    role2: "product manager",
+    role: "developer, sescurity",
+    role2: "infra",
     githubLink: "https://github.com/HzardGenmu/CuraMeet",
     webLink: "https://nutri-mori.vercel.app/",
   },
