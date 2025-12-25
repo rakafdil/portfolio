@@ -2,8 +2,7 @@ import type { IconType } from "react-icons";
 import { SiGmail, SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
 
 export const ASSETS = {
-  profile:
-    "https://www.figma.com/api/mcp/asset/02f71cab-454e-4968-97d7-48d25d3b93d8",
+  profile: "/img/foto2.jpeg",
   tools: [
     "https://www.figma.com/api/mcp/asset/f0c3439b-543a-4138-979b-e0d369612662", // imgImage1
     "https://www.figma.com/api/mcp/asset/54a16e3f-9b3c-44e6-83df-71fce2d6bc8a", // imgImage2

@@ -18,9 +18,7 @@ const AboutSection = () => {
             alt="Raka's profile photo"
             fill
             className="object-cover"
-            unoptimized
           />
-          {/* Overlay div */}
           <div
             className="absolute inset-0 rounded-[200px] mix-blend-soft-light"
             style={{
