@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --font-stint: var(--font-stint);
+  --font-pacifico: var(--font-pacifico);
+  --font-crimson: var(--font-crimson);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-stint: var(--font-stint);
+  --font-pacifico: var(--font-pacifico);
+  --font-crimson: var(--font-crimson);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-crimson), serif;
+}
