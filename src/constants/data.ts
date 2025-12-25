@@ -26,7 +26,7 @@ export const PROJECTS = [
   {
     title: "NutriMori",
     subTitle: "A smart nutrition tracking web application",
-    period: "Sep - Dec 2025",
+    period: "Nov - Dec 2025",
     description:
       "Designed to help users log daily food intake, analyze nutritional values, and receive personalized recommendations based on dietary patterns and individual preferences.",
     role: "front-end developer, backend developer (auth and logging logic)",
@@ -59,7 +59,7 @@ export const PROJECTS = [
   {
     title: "Sukolilo",
     subTitle: "A community information and local service website",
-    period: "Sep - Dec 2025",
+    period: "Jul - Aug 2025",
     description:
       "Developed to present local area data, public information, and community activities in a clear and accessible digital format.",
     role: "front-end developer, backend",
@@ -70,7 +70,7 @@ export const PROJECTS = [
   {
     title: "CellVerse",
     subTitle: "An interactive 3D web-based biology learning application",
-    period: "Sep - Dec 2025",
+    period: "Nov - Dec 2025",
     description:
       "Visualizes biological cell structures in 3D to enhance student understanding through immersive and interactive learning experiences.",
     role: "front-end developer",
@@ -81,7 +81,7 @@ export const PROJECTS = [
   {
     title: "CuraMeet",
     subTitle: "A healthcare consultation and meeting platform",
-    period: "Dec 2025",
+    period: "Sep - Dec 2025",
     description:
       "Designed to streamline interactions between users and medical professionals through a simple, user-friendly consultation flow.",
     role: "front-end developer, logging logic",

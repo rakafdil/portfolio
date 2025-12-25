@@ -95,8 +95,19 @@ export default function ProjectsSection() {
         </div>
         <div className="grid gap-20 lg:grid-cols-2 max-w-7xl">
           {PROJECTS.map((project, index) => (
-            <div
+            <motion.div
               key={index}
+              // --- KONFIGURASI ANIMASI ---
+              initial={{ opacity: 0, y: 100, scale: 0.95 }} // Awal: Transparan, posisi agak bawah, agak kecil
+              whileInView={{ opacity: 1, y: 0, scale: 1 }} // Saat terlihat: Jelas, posisi normal, ukuran normal
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: index % 2 === 0 ? 0 : 0.2, // Delay sedikit untuk item genap/ganjil biar tidak barengan
+              }}
+              viewport={{ once: true, margin: "-100px" }} // Animasi jalan sekali saja, trigger 100px sebelum masuk penuh
+              // ---------------------------
+
               className={`flex flex-col gap-8 group ${
                 index % 2 !== 0 ? "lg:mt-32" : ""
               }`}
@@ -129,15 +140,25 @@ export default function ProjectsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaGithub className="text-3xl opacity-80 hover:opacity-100 transition-all" />
+                    <FaGithub className="text-3xl opacity-80 hover:opacity-100 transition-all hover:scale-110" />
                   </a>
                 </div>
 
-                <p className="mt-1 text-lg tracking-wider md:text-xl">
+                <motion.p
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                  className="mt-1 text-lg tracking-wider md:text-xl"
+                >
                   {project.period}
-                </p>
+                </motion.p>
 
-                <p className="mt-4 text-justify text-lg leading-relaxed tracking-wide md:text-xl">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="mt-4 text-justify text-lg leading-relaxed tracking-wide md:text-xl"
+                >
                   <span className="font-pacifico">{project.subTitle}</span>
                   {` - ${project.description} ${
                     project.role2 === ""
@@ -147,9 +168,9 @@ export default function ProjectsSection() {
                   <span className="font-bold">{project.role} </span>
                   {project.role2 === "" ? "." : "and "}
                   <span className="font-bold">{project.role2}</span>
-                </p>
+                </motion.p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
