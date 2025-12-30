@@ -16,16 +16,6 @@ const cardVariants: Variants = {
 export default function ExperiencesSection() {
   return (
     <section id="experiences" className="relative w-full overflow-hidden py-20">
-      <div className="absolute -left-96 bottom-0 h-[1000px] w-[1000px] rotate-[68deg] opacity-10 pointer-events-none">
-        <svg
-          viewBox="0 0 100 100"
-          className="h-full w-full stroke-slate-400"
-          fill="none"
-        >
-          <path d="M10,50 Q50,10 90,50 Q50,90 10,50" />
-        </svg>
-      </div>
-
       <div className="container relative z-10 mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="font-stint text-6xl tracking-wider text-white md:text-7xl lg:text-8xl">

@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { PROJECTS } from "../constants/data";
 import { motion } from "framer-motion";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaGlobe } from "react-icons/fa";
 import Link from "next/link";
 import BgBox from "./BgBox";
+import { FaWebAwesome } from "react-icons/fa6";
 
 interface SeamlessBorderProps {
   img: string;
@@ -15,7 +16,6 @@ const SeamlessBorder = ({ img, alt, webLink }: SeamlessBorderProps) => {
   const duration = 6;
   return (
     <div className="relative w-full max-w-3xl mx-auto hover:scale-110 transition-all">
-      {/* Background Div */}
       <div className="cursor-pointer relative z-0  w-full rounded-3xl border border-[#172039] bg-[rgba(23,32,57,0.35)] overflow-clip justify-center align-middle">
         <Link href={webLink} target="_blank" rel="noopener noreferrer">
           <Image
@@ -32,7 +32,6 @@ const SeamlessBorder = ({ img, alt, webLink }: SeamlessBorderProps) => {
         className="absolute inset-0 z-10 h-full w-full pointer-events-none rounded-3xl"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Render multiple rects */}
         {[...Array(numberOfLines)].map((_, index) => (
           <motion.rect
             key={index}
@@ -97,17 +96,14 @@ export default function ProjectsSection() {
           {PROJECTS.map((project, index) => (
             <motion.div
               key={index}
-              // --- KONFIGURASI ANIMASI ---
-              initial={{ opacity: 0, y: 100, scale: 0.95 }} // Awal: Transparan, posisi agak bawah, agak kecil
-              whileInView={{ opacity: 1, y: 0, scale: 1 }} // Saat terlihat: Jelas, posisi normal, ukuran normal
+              initial={{ opacity: 0, y: 100, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
                 duration: 0.6,
                 ease: "easeOut",
-                delay: index % 2 === 0 ? 0 : 0.2, // Delay sedikit untuk item genap/ganjil biar tidak barengan
+                delay: index % 2 === 0 ? 0 : 0.2,
               }}
-              viewport={{ once: true, margin: "-100px" }} // Animasi jalan sekali saja, trigger 100px sebelum masuk penuh
-              // ---------------------------
-
+              viewport={{ margin: "-100px" }}
               className={`flex flex-col gap-8 group ${
                 index % 2 !== 0 ? "lg:mt-32" : ""
               }`}
@@ -119,6 +115,22 @@ export default function ProjectsSection() {
               />
 
               <div className="font-crimson text-white">
+                <div className="mb-2">
+                  {project.stack.map((stack, stackIndex) => (
+                    <motion.span
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{
+                        delay: 0.3 + stackIndex * 0.1,
+                        duration: 0.5,
+                      }}
+                      key={stackIndex}
+                      className="bg-[#2F4989] py-1 px-3 text-sm mr-2 rounded-2xl font-stint tracking-widest"
+                    >
+                      {stack}
+                    </motion.span>
+                  ))}
+                </div>
                 <div className="flex justify-between items-center">
                   <h3 className="text-4xl tracking-widest md:text-5xl">
                     <Link
@@ -135,13 +147,24 @@ export default function ProjectsSection() {
                     </Link>
                   </h3>
 
-                  <a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaGithub className="text-3xl opacity-80 hover:opacity-100 transition-all hover:scale-110" />
-                  </a>
+                  <div className="flex  gap-2">
+                    {project.webLink !== "" && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaGlobe className="text-3xl opacity-80 hover:opacity-100 transition-all hover:scale-110" />
+                      </a>
+                    )}
+                    <a
+                      href={project.webLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaGithub className="text-3xl opacity-80 hover:opacity-100 transition-all hover:scale-110" />
+                    </a>
+                  </div>
                 </div>
 
                 <motion.p

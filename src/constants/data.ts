@@ -4,21 +4,22 @@ import { SiGmail, SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
 export const ASSETS = {
   profile: "/img/foto2.jpeg",
   tools: [
-    "https://www.figma.com/api/mcp/asset/f0c3439b-543a-4138-979b-e0d369612662", // imgImage1
-    "https://www.figma.com/api/mcp/asset/54a16e3f-9b3c-44e6-83df-71fce2d6bc8a", // imgImage2
-    "https://www.figma.com/api/mcp/asset/214e972b-3fa0-4461-8fbb-3a3681f53d8e", // imgImage14
-    "https://www.figma.com/api/mcp/asset/47f7f827-84c5-451c-a039-6bafd1efbf8f", // imgImage7
-    "https://www.figma.com/api/mcp/asset/5ed259dc-4f9b-4c31-8fa0-ed63bcb45beb", // imgImage6
-    "https://www.figma.com/api/mcp/asset/26ca3a6e-b78c-433b-9632-e57d1635b2ca", // imgImage15
-    "https://www.figma.com/api/mcp/asset/4be31a9b-88d0-4edb-94d6-c7696bb3231e", // imgImage9
-    "https://www.figma.com/api/mcp/asset/3d28992c-6d25-4c35-ac42-db82fdc5cd58", // imgImage13
-    "https://www.figma.com/api/mcp/asset/4254d710-11b0-4bf7-86da-2b685b7a5062", // imgImage10
-    "https://www.figma.com/api/mcp/asset/5b2a0ceb-ba8a-423d-8e31-5d8bccfed1c5", // imgImage11
-    "https://www.figma.com/api/mcp/asset/3a0a0de0-4c9f-4669-b35c-c0ec04d819c3", // imgImage5
-    "https://www.figma.com/api/mcp/asset/6e2019c3-883c-4b99-8ac8-b53f843360c9", // imgImage12
-    "https://www.figma.com/api/mcp/asset/56aacd8f-9938-4382-b45d-94609b23651c", // imgImage4
-    "https://www.figma.com/api/mcp/asset/b0bb43ea-4d6a-458d-b857-b9137190fc29", // imgImage3
-    "https://www.figma.com/api/mcp/asset/7052c2ed-6566-445a-a6a2-9642f39514d3", // imgImage8
+    "/logo/image 1.png",
+    "/logo/image 2.png",
+    "/logo/image 3.png",
+    "/logo/image 4.png",
+    "/logo/image 5.png",
+    "/logo/image 6.png",
+    "/logo/image 7.png",
+    "/logo/image 8.png",
+    "/logo/image 9.png",
+    "/logo/image 10.png",
+    "/logo/image 11.png",
+    "/logo/image 12.png",
+    "/logo/image 13.png",
+    "/logo/image 14.png",
+    "/logo/image 15.png",
+    "/logo/image 16.png",
   ],
 };
 
@@ -26,6 +27,7 @@ export const PROJECTS = [
   {
     title: "NutriMori",
     subTitle: "A smart nutrition tracking web application",
+    stack: ["Next.js", "Nest.js", "Flask", "Supabase"],
     period: "Nov - Dec 2025",
     description:
       "Designed to help users log daily food intake, analyze nutritional values, and receive personalized recommendations based on dietary patterns and individual preferences.",
@@ -37,6 +39,7 @@ export const PROJECTS = [
   {
     title: "MediScan",
     subTitle: "A web-based health screening and symptom analysis tool",
+    stack: ["Next.js", "Supabase"],
     period: "Aug - Sep 2025",
     description:
       "Allows users to input symptoms and receive preliminary medical insights through a structured, decision-based analysis approach.",
@@ -47,29 +50,34 @@ export const PROJECTS = [
   },
   {
     title: "GrowthWell",
-    subTitle: "A digital platform for personal growth and well-being",
+    subTitle: "A digital marketplace connecting local farmers with consumers",
+    stack: ["Next.js", "Express.js", "Flask", "Supabase"],
     period: "Sep - Oct 2025",
     description:
-      "Built to help users track progress, manage personal goals, and access curated self-improvement resources in a single integrated platform.",
+      "A digital e-commerce platform designed to help local farmers market and sell their agricultural products directly to consumers. The platform reduces reliance on intermediaries by providing product listings, order management, and a simple purchasing flow, enabling fairer pricing for farmers while making fresh local produce more accessible to customers.",
     role: "front-end developer",
     role2: "",
     githubLink: "https://github.com/rakafdil/creanomic",
     webLink: "https://creanomic.vercel.app/products",
   },
+
   {
     title: "Sukolilo",
-    subTitle: "A community information and local service website",
+    subTitle: "An interactive village information website",
+    stack: ["React + Vite"],
     period: "Jul - Aug 2025",
     description:
-      "Developed to present local area data, public information, and community activities in a clear and accessible digital format.",
+      "An interactive and animated village profile website that presents essential information such as organizational charts, public services for document requests, village profiles, and local business data. The platform is integrated with Google Sheets, allowing non-technical users to easily add and manage local business information without directly interacting with the system code.",
     role: "front-end developer",
     role2: "",
     githubLink: "https://github.com/raffi194/Web-Sukolilo",
     webLink: "https://web-sukolilo-deploy.vercel.app/",
   },
+
   {
     title: "CellVerse",
     subTitle: "An interactive 3D web-based biology learning application",
+    stack: ["Next.js", "Three.js"],
     period: "Nov - Dec 2025",
     description:
       "Visualizes biological cell structures in 3D to enhance student understanding through immersive and interactive learning experiences.",
@@ -80,15 +88,18 @@ export const PROJECTS = [
   },
   {
     title: "CuraMeet",
-    subTitle: "A healthcare consultation and meeting platform",
+    subTitle:
+      "A healthcare digital appointment, medical record, and patient administration platform",
+    stack: ["Laravel", "React", "Docker", "Nginx Proxy Manager"],
     period: "Sep - Dec 2025",
     description:
-      "Designed to streamline interactions between users and medical professionals through a simple, user-friendly consultation flow.",
-    role: "developer, sescurity",
-    role2: "infra",
+      "Developed as a security-focused experiment to evaluate common web vulnerabilities and protection mechanisms. The project includes two versions—secure and insecure—to compare implementation practices as part of a DevSecOps course.",
+    role: "developer, security",
+    role2: "infrastructure",
     githubLink: "https://github.com/HzardGenmu/CuraMeet",
-    webLink: "https://nutri-mori.vercel.app/",
+    webLink: "",
   },
+
   // {
   //   title: "TeamQuest",
   //   subTitle: "A team collaboration and task management application",
