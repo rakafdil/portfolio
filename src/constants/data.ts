@@ -80,7 +80,7 @@ export const PROJECTS = [
     stack: ["Next.js", "Three.js"],
     period: "Nov - Dec 2025",
     description:
-      "Visualizes biological cell structures in 3D to enhance student understanding through immersive and interactive learning experiences.",
+      "CellVerse is an interactive, web-based biology learning platform that visualizes biological cell structures in 3D using real-time rendering. The application enhances student understanding through immersive exploration and includes an AI-powered quiz feature generated via Google Gemini to reinforce learning outcomes. Built with Next.js and Three.js. I worked as a front-end developer, implementing 3D interactions and user experience flow, and as a product manager, defining learning goals and feature direction.",
     role: "front-end developer",
     role2: "product manager",
     githubLink: "https://github.com/rakafdil/cell-3d-learning",
@@ -90,12 +90,24 @@ export const PROJECTS = [
     title: "CuraMeet",
     subTitle:
       "A healthcare digital appointment, medical record, and patient administration platform",
-    stack: ["Laravel", "React", "Docker", "Nginx Proxy Manager"],
+    stack: ["Laravel", "React", "Docker", "Nginx Proxy Manager", "PostgreSQL"],
     period: "Sep - Dec 2025",
     description:
       "Developed as a security-focused experiment to evaluate common web vulnerabilities and protection mechanisms. The project includes two versions—secure and insecure—to compare implementation practices as part of a DevSecOps course.",
     role: "developer, security",
     role2: "infrastructure",
+    githubLink: "https://github.com/HzardGenmu/CuraMeet",
+    webLink: "",
+  },
+  {
+    title: "Alomany Healthcare",
+    subTitle: "Expert system on detecting diseases by symptoms",
+    stack: ["Laravel", "MySQL", "Flask"],
+    period: "Apr - Jun 2025",
+    description:
+      "Alomany Healthcare is an early version of Mediscan, a healthcare web application that implements an expert system to detect potential diseases based on user-reported symptoms. The system leverages a predefined symptom dataset and integrates an external machine learning API for symptom analysis. Built using Laravel, MySQL, and Flask. I contributed as a developer, focusing on the symptom checker logic, while also taking part as a product manager in defining features and system flow.",
+    role: "developer",
+    role2: "product manager",
     githubLink: "https://github.com/HzardGenmu/CuraMeet",
     webLink: "",
   },

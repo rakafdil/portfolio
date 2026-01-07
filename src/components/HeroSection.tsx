@@ -61,7 +61,7 @@ export default function HeroSection() {
           "linear-gradient(125deg, rgba(15, 23, 42, 1) 0%, rgba(51, 79, 144, 1) 150%)",
       }}
     >
-      <div className="absolute -top-40 right-0 h-[600px] w-[600px] rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="absolute -top-40 right-0 h-150 w-150 rounded-full bg-blue-500/10 blur-3xl" />
       <svg
         width="1419"
         height="853"
@@ -72,7 +72,7 @@ export default function HeroSection() {
       >
         <circle cx="570" cy="849" r="849" fill="#1D2D56" fillOpacity="0.25" />
       </svg>
-      <div className="absolute bottom-0 left-0 h-[800px] w-[800px] rounded-full bg-blue-600/10 blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-200 w-200 rounded-full bg-blue-600/10 blur-3xl" />
       <svg
         width="975"
         height="987"
