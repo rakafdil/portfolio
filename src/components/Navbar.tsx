@@ -62,8 +62,9 @@ export default function Navbar() {
         {navItems.map((item, i) => (
           <a
             key={item}
-            href={`#${item.toLowerCase()}`}
-            onClick={(e) => handleScroll(e, i)}
+            {...(item === "About"
+              ? { onClick: (e) => handleScroll(e, i) }
+              : { href: `#${item.toLowerCase()}` })}
             className="font-stint text-[1rem] text-white transition-colors hover:text-slate-300 md:text-xl cursor-pointer"
           >
             {item === "About" ? "About Me" : item}
