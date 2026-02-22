@@ -2,9 +2,8 @@
 
 import { useScroll } from "framer-motion";
 import { useRef } from "react";
-import CardWrapper from "@/components/CardWrapper"; // Import komponen wrapper tadi
+import CardWrapper from "@/components/CardWrapper";
 
-// Import section kamu
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -22,8 +21,8 @@ export default function Home() {
   });
 
   const sections = [
-    { component: <HeroSection />, id: "hero" },
-    { component: <AboutSection />, id: "about" },
+    { Component: HeroSection, id: "hero" },
+    { Component: AboutSection, id: "about" },
   ];
 
   return (
@@ -38,9 +37,10 @@ export default function Home() {
       <Navbar />
 
       {sections.map((sect, i) => {
+        const { Component } = sect;
         return (
           <CardWrapper key={i} range={[i * 0.1, 1]} progress={scrollYProgress}>
-            {sect.component}
+            <Component scrollYProgress={scrollYProgress} />
           </CardWrapper>
         );
       })}

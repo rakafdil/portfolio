@@ -1,18 +1,33 @@
 import { ASSETS } from "@/constants/data";
+import { MotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
-const AboutSection = () => {
+const AboutSection = ({
+  scrollYProgress,
+}: {
+  scrollYProgress: MotionValue<number>;
+}) => {
+  const opacity = useTransform(scrollYProgress, [0.1, 0.5], [1, 0]);
+
+  const scale = useTransform(scrollYProgress, [0.1, 1], [1, 0]);
+  const translateY = useTransform(scrollYProgress, [0.1, 1], [0, 800]);
+
   return (
-    <section
+    <motion.section
       id="about"
       className="relative h-screen top-0 flex flex-col w-full overflow-hidden py-20 justify-center"
       style={{
         background:
           "linear-gradient(176deg, rgba(33, 50, 92, 1) 16%, rgba(15, 23, 42, 1) 114%)",
+        opacity,
       }}
     >
       <div className="container mx-auto flex flex-col items-center gap-12 px-4 lg:flex-row lg:justify-center lg:gap-24">
-        <div className="relative h-[350px] w-[280px] overflow-hidden rounded-[200px] md:h-[450px] md:w-[350px]">
+        <motion.div
+          className="relative h-[350px] w-[280px] overflow-hidden rounded-[200px] md:h-[450px] md:w-[350px]"
+          style={{ scale, translateY }}
+        >
           <Image
             src={ASSETS.profile}
             alt="Raka's profile photo"
@@ -26,8 +41,11 @@ const AboutSection = () => {
                 "linear-gradient(170deg, rgba(33, 50, 92, 0.11) 16%, rgba(15, 23, 42, 0.11) 114%)",
             }}
           />
-        </div>
-        <div className="max-w-xl text-center lg:text-left">
+        </motion.div>
+        <motion.div
+          className="max-w-xl text-center lg:text-left"
+          style={{ scale, translateY }}
+        >
           <h2 className="font-stint text-4xl text-slate-50 md:text-5xl lg:text-6xl">
             Hi, I&apos;m{" "}
             <span className="font-pacifico text-slate-400">Raka!</span>
@@ -46,9 +64,9 @@ const AboutSection = () => {
               experience and deployment.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
