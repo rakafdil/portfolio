@@ -4,6 +4,7 @@ import {
   Pacifico,
   Crimson_Text,
 } from "next/font/google";
+import RootShell from "@/components/RootShell";
 import "./globals.css";
 
 const stintUltraCondensed = Stint_Ultra_Condensed({
@@ -39,7 +40,7 @@ export default function RootLayout({
       <body
         className={`${stintUltraCondensed.variable} ${pacifico.variable} ${crimsonText.variable} antialiased`}
       >
-        {children}
+        <RootShell>{children}</RootShell>
       </body>
     </html>
   );

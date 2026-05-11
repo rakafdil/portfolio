@@ -2,7 +2,7 @@ import { CONTACTS } from "@/constants/data";
 
 export default function ContactsSection() {
   return (
-    <section id="contacts" className="relative w-full overflow-hidden py-20">
+    <section id="contacts" className="relative w-full overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="font-stint text-6xl tracking-wider text-white md:text-7xl lg:text-8xl">

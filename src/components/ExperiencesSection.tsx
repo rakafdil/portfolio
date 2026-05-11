@@ -15,7 +15,7 @@ const cardVariants: Variants = {
 
 export default function ExperiencesSection() {
   return (
-    <section id="experiences" className="relative w-full overflow-hidden py-20">
+    <section id="experiences" className="relative w-full overflow-hidden">
       <div className="container relative z-10 mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="font-stint text-6xl tracking-wider text-white md:text-7xl lg:text-8xl">

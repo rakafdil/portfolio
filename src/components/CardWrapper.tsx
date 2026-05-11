@@ -17,13 +17,13 @@ export default function CardWrapper({
 }: CardProps) {
   const container = useRef(null);
 
-  const scale = useTransform(progress, range, [1, 0.8]);
+  const scale = useTransform(progress, range, [1, 1]);
 
   return (
     <div
       id={id}
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
+      className="flex items-center justify-center sticky top-0"
     >
       <motion.div
         className="flex flex-col relative h-full w-full origin-top"

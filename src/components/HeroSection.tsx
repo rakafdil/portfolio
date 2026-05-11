@@ -1,7 +1,6 @@
 "use client";
-import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { useMotionValueEvent } from "framer-motion";
+import { motion, MotionValue, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const path = [
   "M16.896 52.2241C13.312 52.2241 10.624 51.4134 8.832 49.7921C7.04 48.0854 6.144 45.7388 6.144 42.7521C6.144 39.7654 7.296 37.2908 9.6 35.3281C11.9893 33.2801 14.9333 32.2561 18.432 32.2561C21.5893 32.2561 24.1493 33.0241 26.112 34.5601C28.0747 36.0961 29.056 38.2721 29.056 41.0881C29.056 44.5014 27.9467 47.2321 25.728 49.2801C23.5093 51.2428 20.5653 52.2241 16.896 52.2241ZM15.872 120.96C10.3253 120.96 6.272 118.997 3.712 115.072C1.23733 111.147 0 105.941 0 99.4561C0 95.6161 0.469333 90.7094 1.408 84.7361C2.432 78.6774 3.712 73.0454 5.248 67.8401C6.016 65.1094 7.04 63.2321 8.32 62.2081C9.6 61.1841 11.648 60.6721 14.464 60.6721C18.816 60.6721 20.992 62.1228 20.992 65.0241C20.992 67.1574 20.1813 72.1068 18.56 79.8721C16.512 89.2588 15.488 95.6161 15.488 98.9441C15.488 101.504 15.8293 103.467 16.512 104.832C17.1947 106.197 18.3467 106.88 19.968 106.88C21.504 106.88 23.424 105.813 25.728 103.68C28.032 101.547 31.104 98.1761 34.944 93.5681C35.968 92.3734 37.12 91.7761 38.4 91.7761C39.5093 91.7761 40.3627 92.2881 40.96 93.3121C41.6427 94.3361 41.984 95.7441 41.984 97.5361C41.984 100.949 41.1733 103.595 39.552 105.472C31.104 115.797 23.2107 120.96 15.872 120.96Z",
@@ -65,10 +64,6 @@ export default function HeroSection({
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const translateY = useTransform(scrollYProgress, [0, 1], [0, 800]);
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log("scrollYProgress:", latest);
-  });
 
   return (
     <section
@@ -177,7 +172,7 @@ export default function HeroSection({
           />
         </motion.div>
         <motion.a
-          href="#projects"
+          href="/work"
           className="mt-12 rounded-full px-8 py-3 font-crimson text-lg text-white/80 hover:text-white transition-all hover:scale-105 md:text-xl"
           style={{
             background:

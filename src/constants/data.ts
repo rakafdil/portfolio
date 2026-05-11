@@ -26,6 +26,8 @@ export const ASSETS = {
 export const PROJECTS = [
   {
     title: "NutriMori",
+    slug: "nutrimori",
+    type: "Healthcare Tool",
     subTitle: "A smart nutrition tracking web application",
     stack: ["Next.js", "Nest.js", "Flask", "Supabase"],
     period: "Nov - Dec 2025",
@@ -35,9 +37,30 @@ export const PROJECTS = [
     role2: "product manager",
     githubLink: "https://github.com/rakafdil/NutriMori",
     webLink: "https://nutri-mori.vercel.app/",
+    article: `
+NutriMori aims to revolutionize how we track daily food intake by using AI-powered nutrition analysis. 
+The application breaks down your meals and gives personalized recommendations. Let's delve into the process.
+
+## Problem Statement
+Keeping track of daily nutrition is usually tedious. Existing solutions involve manual data entry which deters most users.
+
+## Our Solution
+A seamless web app where you simply take a photo of your meal to know its approximate nutritional values.
+
+## Key Features
+- **Instant Tracking**: Quick and seamless logging.
+- **AI Recommendations**: Get weekly feedback based on your diet pattern.
+    `,
+    milestones: [
+      { date: "Oct 2025", title: "Project Inception", description: "Market research and prototyping.", status: "completed" },
+      { date: "Nov 2025", title: "Core Features Development", description: "Built the auth system and logging logic.", status: "completed" },
+      { date: "Dec 2025", title: "Testing & Launch", description: "Private beta testing with early users.", status: "completed" }
+    ]
   },
   {
     title: "MediScan",
+    slug: "mediscan",
+    type: "Healthcare Tool",
     subTitle: "A web-based health screening and symptom analysis tool",
     stack: ["Next.js", "Supabase"],
     period: "Aug - Sep 2025",
@@ -47,9 +70,26 @@ export const PROJECTS = [
     role2: "product manager",
     githubLink: "https://github.com/rakafdil/mediscan/",
     webLink: "https://mediscan-smoky.vercel.app/",
+    article: `
+MediScan provides structured medical insights by taking user-input symptoms and processing them through an expert system.
+
+## The Approach
+By leveraging established decision trees, the system gives an early assessment, guiding users on whether they need immediate medical consultation.
+
+## Key Features
+- **Symptom Checker**: Intelligent parsing of user inputs.
+- **Preliminary Reports**: Printable PDF summaries to share with doctors.
+    `,
+    milestones: [
+      { date: "Aug 2025", title: "Initial Prototyping", description: "Created low-fidelity wireframes.", status: "completed" },
+      { date: "Sep 2025", title: "Full Scale Development", description: "Implemented symptom analysis backend.", status: "completed" },
+      { date: "Oct 2025", title: "System Refinement", description: "Refining decision tree algorithms.", status: "pending" }
+    ]
   },
   {
     title: "GrowthWell",
+    slug: "growthwell",
+    type: "E-Commerce",
     subTitle: "A digital marketplace connecting local farmers with consumers",
     stack: ["Next.js", "Express.js", "Flask", "Supabase"],
     period: "Sep - Oct 2025",
@@ -59,10 +99,25 @@ export const PROJECTS = [
     role2: "",
     githubLink: "https://github.com/rakafdil/creanomic",
     webLink: "https://creanomic.vercel.app/products",
-  },
+    article: `
+GrowthWell aims to empower local farmers by providing a direct channel to consumers, bypassing the middleman and increasing their revenue margin.
 
+## Why GrowthWell?
+Selling agricultural goods traditionally involves multiple intermediaries which leads to higher consumer prices and lower profits for farmers. GrowthWell mitigates this.
+
+## Technologies Used
+- Next.js for a robust, SEO-friendly front end
+- Supabase for scalable data storage
+    `,
+    milestones: [
+      { date: "Sep 2025", title: "E-Commerce Storefront", description: "Built the core browsing experience.", status: "completed" },
+      { date: "Oct 2025", title: "Farmer Dashboard", description: "Dashboard for order management.", status: "completed" }
+    ]
+  },
   {
     title: "Sukolilo",
+    slug: "sukolilo",
+    type: "Information Portal",
     subTitle: "An interactive village information website",
     stack: ["React + Vite"],
     period: "Jul - Aug 2025",
@@ -72,10 +127,25 @@ export const PROJECTS = [
     role2: "",
     githubLink: "https://github.com/raffi194/Web-Sukolilo",
     webLink: "https://web-sukolilo-deploy.vercel.app/",
-  },
+    article: `
+Sukolilo provides digital presence for offline village communities.
 
+## Overview
+By utilizing low-cost tools like Google Sheets as a CMS, village administrators have full control over the website's content without writing any code.
+
+## Results
+- Boosted local businesses visibility
+- Simplified the bureaucracy for document requests
+    `,
+    milestones: [
+      { date: "Jul 2025", title: "Design Phase", description: "Gathered community requirements.", status: "completed" },
+      { date: "Aug 2025", title: "Development & Delivery", description: "Implemented frontend and integrated Google Sheets.", status: "completed" }
+    ]
+  },
   {
     title: "CellVerse",
+    slug: "cellverse",
+    type: "EdTech",
     subTitle: "An interactive 3D web-based biology learning application",
     stack: ["Next.js", "Three.js"],
     period: "Nov - Dec 2025",
@@ -85,9 +155,25 @@ export const PROJECTS = [
     role2: "product manager",
     githubLink: "https://github.com/rakafdil/cell-3d-learning",
     webLink: "https://cell-3d-learning.vercel.app/",
+    article: `
+CellVerse merges learning with gamification through immersive 3D visualizations.
+
+## Core Features
+- **3D Cell Exploration**: Intersect and explore cell components with Three.js.
+- **AI Quizzes**: Dinamically generated using Google Gemini based on the user's progress.
+
+This approach proved extremely effective in testing among high-school biology students.
+    `,
+    milestones: [
+      { date: "Nov 2025", title: "3D Asset Tuning", description: "Optimizing 3D models for web performance.", status: "completed" },
+      { date: "Dec 2025", title: "Integration", description: "Connecting Next.js frontend with Three.js.", status: "completed" },
+      { date: "Jan 2026", title: "AI Quiz Launch", description: "Rolling out the Gemini powered quizzes.", status: "pending" }
+    ]
   },
   {
     title: "CuraMeet",
+    slug: "curameet",
+    type: "Healthcare Tool",
     subTitle:
       "A healthcare digital appointment, medical record, and patient administration platform",
     stack: ["Laravel", "React", "Docker", "Nginx Proxy Manager", "PostgreSQL"],
@@ -98,9 +184,25 @@ export const PROJECTS = [
     role2: "infrastructure",
     githubLink: "https://github.com/HzardGenmu/CuraMeet",
     webLink: "",
+    article: `
+CuraMeet serves as both an administration platform and a DevSecOps playground.
+
+## Security Experiments
+We maintain a vulnerable build alongside our secure deployment to serve as educational material on web defense.
+
+## Deployment Setup
+Using Docker and Nginx Proxy Manager allowed us to quickly pivot the infrastructure.
+    `,
+    milestones: [
+      { date: "Sep 2025", title: "Drafting Architecture", description: "Deciding the tech stack.", status: "completed" },
+      { date: "Nov 2025", title: "Insecure Version Build", description: "Purposely added vulnerable code.", status: "completed" },
+      { date: "Dec 2025", title: "Secure Implementation", description: "Patching the insecure endpoints.", status: "completed" }
+    ]
   },
   {
     title: "Alomany Healthcare",
+    slug: "alomany-healthcare",
+    type: "Healthcare Tool",
     subTitle: "Expert system on detecting diseases by symptoms",
     stack: ["Laravel", "MySQL", "Flask"],
     period: "Apr - Jun 2025",
@@ -110,30 +212,18 @@ export const PROJECTS = [
     role2: "product manager",
     githubLink: "https://github.com/HzardGenmu/CuraMeet",
     webLink: "",
-  },
+    article: `
+Alomany Healthcare laid the groundwork for robust symptom screening before evolving into its modern iteration.
 
-  // {
-  //   title: "TeamQuest",
-  //   subTitle: "A team collaboration and task management application",
-  //   period: "Sep - Dec 2025",
-  //   description:
-  //     "Helps teams organize tasks, track progress, and improve collaboration within structured project-based workflows.",
-  //   role: "front-end, logging logic",
-  //   role2: "product manager",
-  //   githubLink: "https://github.com/VeryFach/TeamQuest",
-  //   webLink: "https://nutri-mori.vercel.app/",
-  // },
-  // {
-  //   title: "Monku",
-  //   subTitle: "A simple object-oriented programming game project",
-  //   period: "Dec 2025",
-  //   description:
-  //     "Created as a learning project to apply object-oriented programming concepts through core gameplay mechanics and structured code design.",
-  //   role: "front-end, logging logic",
-  //   role2: "product manager",
-  //   githubLink: "https://github.com/ahmadnafi30/MonkuGame",
-  //   webLink: "https://github.com/ahmadnafi30/MonkuGame",
-  // },
+## Features
+- **Symptom DB**: Scalable relational dataset mapping diseases to common indicators.
+- **Machine Learning Integration**: Built bridges to Flask APIs for more complex logic.
+    `,
+    milestones: [
+      { date: "Apr 2025", title: "Data Modeling", description: "Structuring the Laravel backend models.", status: "completed" },
+      { date: "Jun 2025", title: "API Release", description: "Connected the ML Flask service.", status: "completed" }
+    ]
+  }
 ];
 
 export const EXPERIENCES = [

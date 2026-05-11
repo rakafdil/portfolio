@@ -8,10 +8,7 @@ export default function ToolsSection() {
   const duplicatedTools = [...ASSETS.tools, ...ASSETS.tools, ...ASSETS.tools];
 
   return (
-    <section
-      id="tools"
-      className="relative w-full pb-20 pt-12 overflow-hidden bg-black/40"
-    >
+    <section id="tools" className="relative w-full pt-12 overflow-hidden">
       <div className="mb-16 text-center">
         <h2 className="font-stint text-6xl tracking-wider text-white md:text-7xl lg:text-8xl">
           Tools
