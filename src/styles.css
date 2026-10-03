@@ -1,0 +1,721 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — "Sunny Shore to Abyss".
+ * One continuous ocean-depth gradient runs down the whole page:
+ * sunrise sky → sand → shallow turquoise → open teal → deep blue → abyss.
+ * All component colors are semantic tokens defined here.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-foam: var(--foam);
+  --color-glow: var(--glow);
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1.1rem;
+  --background: oklch(0.97 0.02 85);
+  --foreground: oklch(0.3 0.06 230);
+  --card: oklch(0.99 0.012 85);
+  --card-foreground: oklch(0.3 0.06 230);
+  --popover: oklch(0.99 0.012 85);
+  --popover-foreground: oklch(0.3 0.06 230);
+  --primary: oklch(0.68 0.19 35); /* coral */
+  --primary-foreground: oklch(0.99 0.01 85);
+  --secondary: oklch(0.82 0.09 195); /* shallow teal */
+  --secondary-foreground: oklch(0.3 0.06 230);
+  --muted: oklch(0.92 0.02 195);
+  --muted-foreground: oklch(0.48 0.05 230);
+  --accent: oklch(0.85 0.11 80); /* sun amber */
+  --accent-foreground: oklch(0.3 0.06 230);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.55 0.06 230 / 18%);
+  --input: oklch(0.55 0.06 230 / 25%);
+  --ring: oklch(0.68 0.19 35);
+  /* depth tokens */
+  --ink: oklch(0.32 0.065 230);
+  --foam: oklch(0.97 0.015 200);
+  --glow: oklch(0.87 0.14 195);
+  --shore-water: #6cc9c0;
+  --shore-water-soft: rgb(108 201 192 / 0.72);
+  --shore-progress: 0;
+  --bubble-intensity: 0;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-foreground);
+    background-color: #030a14;
+    /* The whole page is one dive: sky → sand → shallows → deep → abyss */
+    background-image: linear-gradient(
+      180deg,
+      #ffe8cf 0%,
+      #f9e2bd 9%,
+      #f3dcb4 15%,
+      #a8e6dc 21%,
+      #74d6cd 28%,
+      #4cc0c2 36%,
+      #2f9db2 45%,
+      #20719f 55%,
+      #144e7e 67%,
+      #0b3059 79%,
+      #061b33 90%,
+      #030a14 100%
+    );
+  }
+
+  .deep-page {
+    min-height: 100vh;
+    background-image: linear-gradient(180deg, #144e7e 0%, #0b3059 35%, #061b33 70%, #030a14 100%);
+  }
+}
+
+/* ---------- component classes ---------- */
+
+.surface-zone::after {
+  position: absolute;
+  inset: auto 0 -1px;
+  z-index: 1;
+  height: clamp(18rem, 45vh, 32rem);
+  content: "";
+  pointer-events: none;
+
+  opacity: 1;
+
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(168 230 220 / 0.08) 18%,
+    rgb(168 230 220 / 0.28) 38%,
+    rgb(108 201 192 / 0.55) 65%,
+    rgb(108 201 192 / 0.18) 85%,
+    transparent 100%
+  );
+}
+
+.surface-content,
+.surface-ambience {
+  opacity: clamp(0.18, calc(1.2 - var(--shore-progress) * 1.12), 1);
+  transform: translate3d(0, calc(var(--shore-progress) * -1.5rem), 0);
+  transition: opacity 80ms linear;
+  will-change: opacity, transform;
+}
+
+.shore-waves {
+  z-index: 2;
+  opacity: clamp(0.24, calc(1.06 - var(--shore-progress) * 0.78), 1);
+  transform: translate3d(0, calc(var(--shore-progress) * 2.25rem), 0);
+  filter: blur(calc(var(--shore-progress) * 1.2px));
+  will-change: opacity, transform, filter;
+}
+
+.bubble-curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+
+  opacity: var(--bubble-intensity, 0);
+
+  /*
+   * Sedikit blur bikin bubble lebih menyatu
+   * dengan transition air.
+   */
+  filter: blur(0.1px);
+
+  /*
+   * Jangan bikin browser repaint seluruh subtree
+   * kalau tidak diperlukan.
+   */
+  contain: layout paint;
+}
+
+.bubble-curtain:has(.transition-bubble) {
+  visibility: visible;
+}
+
+.transition-bubble {
+  position: absolute;
+  left: var(--bubble-left);
+  bottom: -3rem;
+
+  width: var(--bubble-size);
+  aspect-ratio: 1;
+
+  border-radius: 9999px;
+
+  border: 1.5px solid color-mix(in oklab, white 78%, transparent);
+
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgb(255 255 255 / 0.42),
+    rgb(255 255 255 / 0.08) 42%,
+    transparent 72%
+  );
+
+  box-shadow:
+    inset 3px 3px 7px rgb(255 255 255 / 0.35),
+    inset -2px -2px 5px rgb(255 255 255 / 0.08),
+    0 0 12px rgb(255 255 255 / 0.08);
+
+  animation: transition-bubble-rise var(--bubble-duration) var(--bubble-delay) ease-in-out infinite;
+
+  will-change: transform, opacity;
+}
+
+@layer components {
+  .glass-card {
+    border-radius: 1.5rem;
+    background: color-mix(in oklab, white 20%, transparent);
+    border: 1px solid color-mix(in oklab, white 55%, transparent);
+    box-shadow: 0 22px 48px -20px color-mix(in oklab, var(--ink) 30%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .deep-card {
+    border-radius: 1.5rem;
+    background: color-mix(in oklab, white 6%, transparent);
+    border: 1px solid color-mix(in oklab, var(--foam) 14%, transparent);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 28px 64px -28px rgb(0 0 0 / 0.55);
+  }
+
+  .project-card {
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.12),
+      rgb(255 255 255 / 0.035)
+    ) !important;
+    border: 1px solid rgb(196 232 255 / 0.22) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.1),
+      0 24px 60px -32px rgb(0 0 0 / 0.65);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+  }
+
+  .project-card:hover {
+    border-color: rgb(196 232 255 / 0.38) !important;
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.16),
+      rgb(255 255 255 / 0.055)
+    ) !important;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 9999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid color-mix(in oklab, currentColor 28%, transparent);
+  }
+
+  .btn-coral {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.85rem 1.7rem;
+    font-weight: 600;
+    box-shadow: 0 16px 34px -12px color-mix(in oklab, var(--primary) 60%, transparent);
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s,
+      filter 0.35s;
+  }
+  .btn-coral:hover {
+    transform: translateY(-2px) scale(1.03);
+    filter: brightness(1.07);
+    box-shadow: 0 22px 44px -12px color-mix(in oklab, var(--primary) 70%, transparent);
+  }
+
+  .link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.05rem 1.3rem;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in oklab, var(--foam) 13%, transparent);
+    background: color-mix(in oklab, var(--foam) 5%, transparent);
+    transition:
+      background 0.3s,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-row:hover {
+    background: color-mix(in oklab, var(--foam) 11%, transparent);
+    transform: translateX(6px);
+  }
+
+  .skill-track {
+    position: relative;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--foam) 18%, transparent);
+    overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .eyebrow {
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .depth-shadow {
+    text-shadow: 0 2px 26px rgb(3 20 40 / 0.5);
+  }
+}
+
+/* ---------- scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- creature & ambient animations ---------- */
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+@keyframes drift {
+  from {
+    transform: translateX(-18vw);
+  }
+  to {
+    transform: translateX(115vw);
+  }
+}
+@keyframes fly {
+  0% {
+    transform: translate(-15vw, 0);
+  }
+  50% {
+    transform: translate(42vw, -42px);
+  }
+  100% {
+    transform: translate(115vw, 18px);
+  }
+}
+@keyframes wave-move {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(-9px);
+  }
+  50% {
+    transform: translateY(11px);
+  }
+}
+@keyframes bob-x {
+  0%,
+  100% {
+    transform: translate(-16px, -6px);
+  }
+  50% {
+    transform: translate(16px, 8px);
+  }
+}
+@keyframes jf-bell {
+  0%,
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+  50% {
+    transform: scaleY(0.85) scaleX(1.08);
+  }
+}
+@keyframes tent-wave {
+  0%,
+  100% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(-7deg);
+  }
+}
+@keyframes swim {
+  from {
+    transform: translateX(-35vw);
+  }
+  to {
+    transform: translateX(135vw);
+  }
+}
+@keyframes flipper {
+  0%,
+  100% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+@keyframes rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-108vh);
+    opacity: 0;
+  }
+}
+@keyframes transition-bubble-rise {
+  0% {
+    transform: translate3d(0, 8vh, 0) scale(0.42);
+
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.8;
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 0.78;
+  }
+
+  88% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translate3d(var(--bubble-drift), -112vh, 0) scale(1.08);
+
+    opacity: 0;
+  }
+}
+@keyframes rays-pulse {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes lure-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes snow-fall {
+  0% {
+    transform: translateY(-4vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(106vh) translateX(7vw);
+    opacity: 0;
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes crab-scuttle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(74px);
+  }
+}
+@keyframes crab-bob {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(0.93);
+  }
+  70% {
+    transform: scaleY(1.04);
+  }
+}
+@keyframes spout {
+  0% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+.sun-rays {
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+  animation: spin-slow 44s linear infinite;
+}
+.palm-fronds {
+  transform-box: view-box;
+  transform-origin: 96px 78px;
+  animation: sway 6.5s ease-in-out infinite;
+}
+.palm-sway {
+  transform-origin: bottom center;
+  animation: sway 9s ease-in-out infinite;
+}
+.fly {
+  animation: fly 30s linear infinite;
+}
+.cloud-drift {
+  animation: drift 85s linear infinite;
+}
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  animation: wave-move 11s linear infinite;
+}
+.wave-back {
+  animation-duration: 19s;
+  animation-direction: reverse;
+  opacity: 0.5;
+}
+.jf-bob {
+  animation: bob 5.5s ease-in-out infinite;
+}
+.jf-bell {
+  transform-box: view-box;
+  animation: jf-bell 2.6s ease-in-out infinite;
+}
+.jf-t {
+  transform-box: view-box;
+  animation: tent-wave 3.2s ease-in-out infinite;
+}
+.glow {
+  animation: glow-pulse 3.4s ease-in-out infinite;
+}
+.school {
+  animation: swim 30s linear infinite;
+}
+.school-slow {
+  animation-duration: 60s;
+}
+.turtle-drift {
+  animation: bob-x 15s ease-in-out infinite;
+}
+.flipper {
+  transform-box: view-box;
+  animation: flipper 3.4s ease-in-out infinite;
+}
+.whale-swim {
+  animation: swim 100s linear infinite;
+}
+.bubble {
+  position: absolute;
+  bottom: -5vh;
+  border-radius: 9999px;
+  border: 1.5px solid rgb(255 255 255 / 0.55);
+  background: rgb(255 255 255 / 0.12);
+  animation: rise linear infinite;
+}
+.snow {
+  position: absolute;
+  top: -3vh;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.55);
+  animation: snow-fall linear infinite;
+}
+.light-rays {
+  position: absolute;
+  inset: 0;
+  top: 10%;
+  overflow: visible;
+  pointer-events: none;
+}
+.light-rays > div {
+  position: absolute;
+  top: -12%;
+  height: 78%;
+  width: 110px;
+  transform: skewX(-16deg);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0) 82%);
+  filter: blur(10px);
+  animation: rays-pulse 8s ease-in-out infinite;
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.crab-walk {
+  animation: crab-scuttle 9s ease-in-out infinite;
+}
+.crab-bob {
+  transform-origin: 50% 82%;
+  animation: crab-bob 0.7s ease-in-out infinite;
+}
+.spout {
+  animation: spout 3.4s ease-out infinite;
+}
+.lure {
+  animation: lure-pulse 1.8s ease-in-out infinite;
+}
+
+/* depth meter */
+.depth-meter {
+  position: fixed;
+  right: 1.4rem;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  mix-blend-mode: difference;
+  color: white;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+}
+.depth-track {
+  position: relative;
+  width: 2px;
+  height: 130px;
+  background: rgb(255 255 255 / 0.35);
+  border-radius: 9999px;
+}
+.depth-dot {
+  position: absolute;
+  left: 50%;
+  translate: -50% -50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: white;
+  transition: top 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
