@@ -22,9 +22,13 @@ import {
   Waves,
   Whale,
 } from "@/components/ocean/Creatures";
-import aboutPortrait from "@/assets/about-portrait.png";
+import aboutPortrait from "/img/foto2.jpeg";
 import projectThumb from "@/assets/project-karang.jpg";
 import videoBg from "@/assets/sunny-go.mp4";
+import { BubbleTransition } from "@/components/ocean/BubbleTransition";
+import { navigateWithBubble } from "@/lib/bubble-navigate";
+import { ChromaKeyVideo } from "chromakey-video-react";
+import { OrcaVideo } from "@/components/ocean/Orca";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,17 +53,28 @@ export const Route = createFileRoute("/")({
 });
 
 const SKILLS = [
-  { name: "Frontend Engineering", level: 95, tools: "React · TypeScript · Tailwind" },
-  { name: "Motion & Animation", level: 90, tools: "Motion · GSAP · Lottie" },
-  { name: "Product & UI Design", level: 76, tools: "Figma · Prototyping" },
-  { name: "Backend & Cloud", level: 70, tools: "Node · Postgres · Edge functions" },
+  {
+    name: "Frontend Development",
+    level: 95,
+    tools: "React · Next.js · TypeScript · Tailwind CSS · Framer Motion",
+  },
+  {
+    name: "Backend Development",
+    level: 90,
+    tools: "NestJS · Laravel · Express.js · FastAPI · PostgreSQL",
+  },
+  { name: "Product & UI Design", level: 80, tools: "Figma · Lovable · UI/UX Prototyping" },
+  {
+    name: "DevOps, Cloud & Automation",
+    level: 75,
+    tools: "Docker · Nginx · CI/CD (GitHub Actions) · n8n · Supabase",
+  },
 ];
 
 const LINKS = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Dribbble", href: "https://dribbble.com" },
+  { label: "GitHub", href: "https://github.com/rakafdil" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/m-raka-fadillah-3a2964208" },
+  { label: "Instagram", href: "https://instagram.com/_rakaf" },
 ];
 
 const MARQUEE = [
@@ -142,6 +157,40 @@ function SkillRow({
 }
 
 function Index() {
+  const topProjects = PROJECTS.slice(0, 4);
+  const gridProjects = PROJECTS.slice(4);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const duration = 100; // 100ms * 100 = 10 detik
+
+  // EFFECT 1: Hanya mengurus jalannya timer progress
+  useEffect(() => {
+    if (isHovered) return;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        const nextProgress = prev + 1;
+        // Mentok di 100, biarkan Effect 2 yang meresetnya
+        return nextProgress > 100 ? 100 : nextProgress;
+      });
+    }, duration);
+
+    return () => clearInterval(timer);
+  }, [isHovered, duration]);
+
+  // EFFECT 2: Mengganti project HANYA saat progress menyentuh 100
+  useEffect(() => {
+    if (progress >= 100) {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % topProjects.length);
+      setProgress(0); // Reset timer ke 0 setelah pindah project
+    }
+  }, [progress, topProjects.length]);
+
+  const featuredProject = topProjects[activeIndex];
+
   return (
     <div className="relative">
       <DepthMeter />
@@ -152,10 +201,36 @@ function Index() {
             Raka F.
           </a>
           <div className="hidden items-center gap-8 text-sm font-medium md:flex">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+            <button
+              onClick={() => navigateWithBubble("#about")}
+              className="hover:text-green-500 hover:font-bold hover:cursor-pointer"
+            >
+              About
+            </button>
+            <button
+              onClick={() => navigateWithBubble("#skills")}
+              className="hover:text-green-500 hover:font-bold hover:cursor-pointer"
+            >
+              Skills
+            </button>
+            <button
+              onClick={() => navigateWithBubble("#experiences")}
+              className="hover:text-green-500 hover:font-bold hover:cursor-pointer"
+            >
+              Experiences
+            </button>
+            <button
+              onClick={() => navigateWithBubble("#projects")}
+              className="hover:text-green-500 hover:font-bold hover:cursor-pointer"
+            >
+              Projects
+            </button>
+            <button
+              onClick={() => navigateWithBubble("#contact")}
+              className="hover:text-green-500 hover:font-bold hover:cursor-pointer"
+            >
+              Contact
+            </button>
           </div>
         </div>
       </nav>
@@ -171,7 +246,16 @@ function Index() {
             loop
             muted
             playsInline
-            className="absolute inset-0 h-full w-full object-cover z-0 "
+            className="
+              absolute inset-0
+              z-0
+              h-full w-full
+              object-cover
+              object-[40%_center]
+              scale-110
+              md:scale-100
+              md:object-center
+            "
             style={{
               maskImage: `linear-gradient(
                 180deg,
@@ -196,11 +280,11 @@ function Index() {
         </div>
         <div className="surface-content relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 pt-32 pb-40">
           <Reveal>
-            <p className="eyebrow text-ink/70">Portfolio © 2026 — Jakarta, Indonesia</p>
+            <p className="eyebrow text-ink/70">Indonesia</p>
           </Reveal>
           <Reveal delay={130}>
             <h1 className="mt-5 font-display text-6xl font-semibold leading-[0.95] text-ink md:text-8xl">
-              Raka
+              M. Raka
               <br />
               Fadillah
             </h1>
@@ -212,9 +296,18 @@ function Index() {
             </p>
           </Reveal>
           <Reveal delay={390}>
-            <a href="#about" className="btn-coral mt-10 w-fit">
-              Dive in <ArrowDown size={18} />
-            </a>
+            <button
+              onClick={() => {
+                window.dispatchEvent(new Event("bubble-transition"));
+
+                document.getElementById("about")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+              className="btn-coral mt-10 w-fit"
+            >
+              Dive In <ArrowDown size={18} />
+            </button>
           </Reveal>
         </div>
       </section>
@@ -224,6 +317,7 @@ function Index() {
         id="about"
         className="relative flex min-h-screen items-center overflow-x-clip overflow-y-visible py-28 md:py-36"
       >
+        <BubbleTransition />
         <BubbleCurtain />
         <LightRays />
 
@@ -250,29 +344,39 @@ function Index() {
 
           <Reveal delay={160} className="md:col-span-3">
             <div className="glass-card flex h-full flex-col p-8 md:p-10">
-              <p className="eyebrow text-ink/60">Currently</p>
+              <p className="eyebrow text-ink/60">Software Engineer - 7th Semestre</p>
               <h3 className="mt-3 font-display text-2xl text-ink md:text-3xl">
-                Creative Developer @ Ombak Studio
+                Student @ Brawijaya University
               </h3>
               <p className="mt-2 flex items-center gap-2 text-sm text-ink/70">
-                <MapPin size={15} /> Jakarta, Indonesia — UTC+7
+                <MapPin size={15} /> Malang, Indonesia — UTC+7
               </p>
               <p className="mt-5 leading-relaxed text-ink/80">
-                For the past five years I've been building interfaces that move — design systems,
-                interactive stories, and product UIs with a soft spot for motion,
-                micro-interactions, and the occasional easter egg.
+                I design, build, and ship fullstack products with a focus on real-world impact. From
+                early system design to deployment, I love turning ideas into clean, reliable
+                applications. I care about scalable architectures, thoughtful UX, and security
+                across the stack.
               </p>
               <div className="mt-7 flex flex-wrap gap-2 text-ink/80">
-                {["React", "TypeScript", "Tailwind", "Motion", "Figma", "Node"].map((t) => (
-                  <span key={t} className="chip">
+                {[
+                  "Frontend Development",
+                  "Backend Development",
+                  "AI Automation",
+                  "Product Designer",
+                  "DevOps",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="chip transition-all duration-500 hover:bg-white/40 backdrop-blur-lg"
+                  >
                     {t}
                   </span>
                 ))}
               </div>
               <div className="mt-auto grid grid-cols-3 gap-4 pt-9">
                 {[
-                  ["5+", "Years diving"],
-                  ["40+", "Projects shipped"],
+                  ["2+", "Years Building"],
+                  ["10", "Projects shipped"],
                   ["∞", "Coffee consumed"],
                 ].map(([n, l]) => (
                   <div key={l}>
@@ -333,7 +437,7 @@ function Index() {
               <Reveal key={e.role + e.company} delay={i * 120}>
                 <li className="relative">
                   <span className="glow-pulse absolute -left-[41px] top-2 h-4 w-4 rounded-full bg-primary ring-4 ring-primary/25" />
-                  <div className="deep-card p-6 md:p-7">
+                  <div className="deep-card p-6 md:p-7 transition-transform duration-500 ease-out hover:-translate-y-2">
                     <p className="eyebrow text-foam/60">{e.period}</p>
                     <h3 className="mt-2 font-display text-2xl text-foam">{e.role}</h3>
                     <p className="text-sm font-medium text-foam/80">{e.company}</p>
@@ -348,6 +452,7 @@ function Index() {
 
       {/* ---------- ZONE 4 · THE DEEP ---------- */}
       <section id="projects" className="relative overflow-x-clip overflow-y-visible py-28 md:py-40">
+        <OrcaVideo />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <Reveal>
             <p className="eyebrow text-foam/70 depth-shadow">Selected work</p>
@@ -357,46 +462,73 @@ function Index() {
           </Reveal>
 
           <Reveal delay={140} className="mt-12">
-            <a href="#contact" className="block">
-              <Card className="project-card deep-card group grid overflow-hidden p-0 text-foam transition-transform duration-500 hover:-translate-y-1.5 md:grid-cols-2">
+            <a href={featuredProject.webLink || "#contact"} className="block">
+              <Card
+                className="project-card deep-card group grid overflow-hidden p-0 text-foam transition-transform duration-500 hover:-translate-y-1.5 md:grid-cols-2"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
                 <img
-                  src={projectThumb}
-                  alt="Karang design system preview"
-                  className="h-64 w-full object-cover md:h-full"
+                  key={featuredProject.imageSrc}
+                  src={featuredProject.imageSrc}
+                  alt={`${featuredProject.title} preview`}
+                  className="h-64 w-full object-cover animate-in fade-in duration-700 md:h-full"
                   loading="lazy"
                   width={1216}
                   height={832}
                 />
-                <CardContent className="p-8 md:p-11">
-                  <p className="eyebrow text-foam/60">Featured — Design System</p>
-                  <h3 className="depth-shadow mt-3 font-display text-3xl text-foam md:text-4xl">
-                    Karang DS
-                  </h3>
-                  <p className="mt-4 leading-relaxed text-foam/75">
-                    A coral-reef-inspired design system: 120+ tokens, dark-depth theming, and
-                    documentation that swims. Powering three products at Ombak Studio.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2 text-foam/85">
-                    {["Design tokens", "React", "Storybook"].map((t) => (
-                      <span key={t} className="chip">
-                        {t}
-                      </span>
-                    ))}
+
+                <CardContent className="flex flex-col justify-between p-8 md:p-11">
+                  <div>
+                    <p className="eyebrow text-foam/60">{featuredProject.kind}</p>
+                    <h3 className="depth-shadow mt-3 font-display text-3xl text-foam md:text-4xl animate-in slide-in-from-bottom-2 fade-in duration-500">
+                      {featuredProject.title}
+                    </h3>
+                    <p className="mt-4 leading-relaxed text-foam/75 animate-in slide-in-from-bottom-2 fade-in duration-700">
+                      {featuredProject.desc}
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-2 text-foam/85">
+                      {featuredProject.tags.map((t) => (
+                        <span key={t} className="chip">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <span className="mt-8 inline-flex items-center gap-2 font-medium text-foam">
-                    View case study
-                    <ArrowUpRight
-                      size={18}
-                      className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                    />
-                  </span>
+
+                  <div className="mt-10">
+                    <span className="inline-flex items-center gap-2 font-medium text-foam">
+                      View case study
+                      <ArrowUpRight
+                        size={18}
+                        className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                      />
+                    </span>
+
+                    {/* Progress Bar Timer */}
+                    <div className="mt-6 flex items-center gap-4">
+                      <div className="h-1 flex-1 overflow-hidden rounded-full bg-foam/20">
+                        <div
+                          className="h-full bg-foam rounded-full"
+                          style={{
+                            width: `${progress + 3}%`,
+                            transition: progress === 0 ? "none" : `width ${duration}ms linear`,
+                          }}
+                        />
+                      </div>
+                      <span className="text-xs font-mono tracking-widest text-foam/60">
+                        0{activeIndex + 1} / 0{topProjects.length}
+                      </span>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </a>
           </Reveal>
 
+          {/* Grid Projects */}
           <div className="mt-6 grid gap-6 md:grid-cols-3">
-            {PROJECTS.slice(0, 3).map((p, i) => (
+            {gridProjects.map((p, i) => (
               <Reveal key={p.title} delay={i * 130}>
                 <Card className="project-card deep-card group flex h-full flex-col p-7 text-foam transition-transform duration-500 hover:-translate-y-1.5">
                   <CardHeader className="p-0">
@@ -486,7 +618,7 @@ function Index() {
                     I'll bring the motion, the pixels, and maybe a whale.
                   </p>
                 </div>
-                <a href="mailto:halo@rakafadillah.dev" className="btn-coral mt-10 w-fit">
+                <a href="mailto:halo@rakafadillah123@gmail.com" className="btn-coral mt-10 w-fit">
                   Say hello <Mail size={18} />
                 </a>
               </div>

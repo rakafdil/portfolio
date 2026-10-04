@@ -183,6 +183,70 @@
   visibility: visible;
 }
 
+.bubble-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  /*background: rgb(10 40 60 / 0.08);*/
+}
+
+.fullscreen-bubble {
+  position: absolute;
+
+  left: var(--bubble-left);
+  bottom: -50vh;
+
+  width: var(--bubble-size);
+  aspect-ratio: 1;
+
+  border-radius: 9999px;
+
+  border: 1.5px solid rgb(255 255 255 / 0.65);
+
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgb(255 255 255 / 0.55),
+    rgb(255 255 255 / 0.16) 35%,
+    rgb(255 255 255 / 0.04) 70%,
+    transparent 100%
+  );
+
+  box-shadow:
+    inset 3px 3px 8px rgb(255 255 255 / 0.35),
+    inset -2px -2px 5px rgb(255 255 255 / 0.08);
+
+  animation: fullscreen-bubble-rise var(--bubble-duration) var(--bubble-delay)
+    cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+
+  will-change: transform, opacity;
+}
+
+@keyframes fullscreen-bubble-rise {
+  0% {
+    transform: translate3d(0, 15vh, 0) scale(0.2);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, -155vh, 0) scale(1.15);
+
+    opacity: 0;
+  }
+}
+
 .transition-bubble {
   position: absolute;
   left: var(--bubble-left);
@@ -226,7 +290,7 @@
     background: color-mix(in oklab, white 6%, transparent);
     border: 1px solid color-mix(in oklab, var(--foam) 14%, transparent);
     backdrop-filter: blur(5px);
-    box-shadow: 0 28px 64px -28px rgb(0 0 0 / 0.55);
+    box-shadow: 0 28px 64px -28px rgb(0 0 0 / 0.25);
   }
 
   .project-card {
@@ -324,7 +388,7 @@
   }
 
   .depth-shadow {
-    text-shadow: 0 2px 26px rgb(3 20 40 / 0.5);
+    text-shadow: 0 2px 26px rgb(3 20 40 / 0.15);
   }
 }
 
@@ -332,7 +396,7 @@
 
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
+  /*transform: translateY(32px);*/
   transition:
     opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
@@ -555,6 +619,15 @@
   100% {
     transform: translateY(-30px);
     opacity: 0;
+  }
+}
+
+@keyframes progress-slide {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
   }
 }
 
